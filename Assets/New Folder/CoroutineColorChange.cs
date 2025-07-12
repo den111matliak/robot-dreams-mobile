@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ColorCycler : MonoBehaviour
+public class CoroutineColorChange : MonoBehaviour
 {
     [SerializeField] private float transitionDuration = 2f;
 
