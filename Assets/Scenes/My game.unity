@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionDuration: 2
+  rend: {fileID: 1289032447}
 --- !u!1 &1660999803
 GameObject:
   m_ObjectHideFlags: 0
