@@ -3,37 +3,27 @@ using Unity.Cinemachine;
 
 public class CameraChanger : MonoBehaviour
 {
-    public CinemachineCamera cam1;
-    public CinemachineCamera cam2;
-    public CinemachineCamera cam3;
+    [SerializeField] private CinemachineCamera[] cameras;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        ActivateCamera(cam1);
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        ActivateCamera(cam2);
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        ActivateCamera(cam3);
+        if (Input.GetKeyDown(KeyCode.Alpha1)) ActivateCamera(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) ActivateCamera(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) ActivateCamera(2);
     }
 
-    void ActivateCamera(CinemachineCamera activeCam)
+    void ActivateCamera(int index)
     {
-        if (cam1 == activeCam)
-            cam1.Priority = 10;
-        else
-            cam1.Priority = 0;
-
-        if (cam2 == activeCam)
-            cam2.Priority = 10;
-        else
-            cam2.Priority = 0;
-
-        if (cam3 == activeCam)
-            cam3.Priority = 10;
-        else
-            cam3.Priority = 0;
+        for (int i = 0; i < cameras.Length; i++)
+        {
+            if (i == index)
+            {
+                cameras[i].Priority = 10;
+            }
+            else
+            {
+                cameras[i].Priority = 0;
+            }
+        }
     }
 }
