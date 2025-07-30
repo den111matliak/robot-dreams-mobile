@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collectablePrefab: {fileID: 2549553549463986649, guid: 53d2e528580d9424dbd57b370f40744b, type: 3}
+  spawnPoints:
+  - {fileID: 8072112825814064233}
+  - {fileID: 7993544682695238264}
+  - {fileID: 5084705150519697853}
+  - {fileID: 4233745985836077687}
 --- !u!1 &6030571584770507115
 GameObject:
   m_ObjectHideFlags: 0

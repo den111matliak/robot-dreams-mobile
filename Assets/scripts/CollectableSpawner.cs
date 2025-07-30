@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class CollectableSpawner : MonoBehaviour
 {
-    public GameObject collectablePrefab;
+    [SerializeField] private GameObject collectablePrefab;
+    [SerializeField] private Transform[] spawnPoints;
 
     void Start()
     {
-        Transform spawnPointsParent = transform.Find("CollectableSpawnPoints");
-        if (spawnPointsParent != null)
+        foreach (Transform point in spawnPoints)
         {
-            foreach (Transform point in spawnPointsParent)
-            {
-                Instantiate(collectablePrefab, point.position, point.rotation, transform);
-            }
+            Instantiate(collectablePrefab, point.position, point.rotation, transform);
         }
     }
 }
