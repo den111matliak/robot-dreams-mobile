@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1024004489846174891}
   - component: {fileID: -4722610756610667378}
   - component: {fileID: 5108950380986703464}
+  - component: {fileID: 4515769132977918852}
   m_Layer: 0
   m_Name: DonutCollectable
   m_TagString: Untagged
@@ -109,6 +110,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 994ec1dfdc16a4c83895283add1288c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4515769132977918852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2549553549463986649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6f294885856494d84348fcf1e38209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: Player
+  scoreValue: 1
+  donutSfx: 0
+  spatialize: 1
 --- !u!1001 &4009790480871435040
 PrefabInstance:
   m_ObjectHideFlags: 0
