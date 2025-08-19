@@ -6,15 +6,11 @@ public class PlayerDamage : MonoBehaviour
     [Header("Refs")]
     [SerializeField] private Animator animator;
 
-    [Header("Detection (Layers only)")]
-    [Tooltip("Шари, які вважаємо за урон (наприклад, Obstacle).")]
-    [SerializeField] private LayerMask damageLayers;
-
     [Header("Hit logic")]
-    [SerializeField] private float hitCooldown = 0.6f;
-    [SerializeField] private bool lockMovementOnHit = false;
+    [SerializeField] private float hitCooldown = 0.6f;      // prevents rapid re-hits
+    [SerializeField] private bool lockMovementOnHit = false; // optional: pause movement while hit anim plays
 
-    private const string HitTrigger = "isHit"; // тригер в Animator
+    private const string HitTrigger = "isHit";
     private static readonly int HitTriggerHash = Animator.StringToHash(HitTrigger);
 
     private float _nextHitTime;
@@ -22,21 +18,21 @@ public class PlayerDamage : MonoBehaviour
 
     void Reset()
     {
-        animator = GetComponentInChildren<Animator>();
+        if (animator == null) animator = GetComponentInChildren<Animator>();
         var rb = GetComponent<Rigidbody>();
         if (rb) rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
     }
 
-    void OnTriggerEnter(Collider other) { TryHit(other); }
-    void OnCollisionEnter(Collision other) { TryHit(other.collider); }
-
-    private void TryHit(Collider other)
+    /// <summary>
+    /// Called by hazards (cars) when they hit the player. Returns true if the hit was accepted.
+    /// </summary>
+    public bool ApplyHit()
     {
-        if (!IsInDamageLayers(other.gameObject.layer)) return;
-        if (Time.time < _nextHitTime) return;
+        if (Time.time < _nextHitTime) return false;
 
         _nextHitTime = Time.time + hitCooldown;
 
+        if (animator == null) animator = GetComponentInChildren<Animator>();
         if (animator) animator.SetTrigger(HitTriggerHash);
 
         if (lockMovementOnHit)
@@ -44,15 +40,14 @@ public class PlayerDamage : MonoBehaviour
             _movementLocked = true;
             Invoke(nameof(UnlockMove), hitCooldown);
         }
-    }
 
-    private bool IsInDamageLayers(int layer)
-    {
-        return (damageLayers.value & (1 << layer)) != 0;
+        return true;
     }
 
     private void UnlockMove() => _movementLocked = false;
 
-    // Якщо хочеш блокувати керування у PlayerController:
+    /// <summary>
+    /// Read this from PlayerController if you want to pause movement during hit.
+    /// </summary>
     public bool MovementLocked => _movementLocked;
 }
