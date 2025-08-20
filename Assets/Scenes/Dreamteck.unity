@@ -1103,11 +1103,12 @@ MonoBehaviour:
   gravity: -40
   groundY: 0
   groundSnap: 0.01
-  coyoteTime: 0.1
   jumpBufferTime: 0.1
   groundedStableTime: 0.05
   animator: {fileID: 1892406485}
   alwaysRun: 1
+  jumpStateName: Jump
+  jumpSFX: {fileID: 1892406489}
 --- !u!4 &1892406484 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441500, guid: 498a13929c1393e44be1126bcadc448b, type: 3}
@@ -1181,9 +1182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1892406485}
-  damageLayers:
-    serializedVersion: 2
-    m_Bits: 64
   hitCooldown: 0.6
   lockMovementOnHit: 0
 --- !u!114 &1892406489
@@ -1513,11 +1511,12 @@ MonoBehaviour:
   gravity: -30
   groundY: 0
   groundSnap: 0.01
-  coyoteTime: 0.1
   jumpBufferTime: 0.1
   groundedStableTime: 0.05
   animator: {fileID: 0}
   alwaysRun: 1
+  jumpStateName: Jump
+  jumpSFX: {fileID: 0}
 --- !u!1 &2136985214
 GameObject:
   m_ObjectHideFlags: 0

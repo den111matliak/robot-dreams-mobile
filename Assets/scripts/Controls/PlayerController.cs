@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string jumpStateName = "Jump"; // exact name of your Jump state in Animator
     private bool _jumpInProgress;
 
+    // Audio: cache JumpSFX component to avoid GetComponent each jump
+    [Header("Audio")]
+    [SerializeField] private JumpSFX jumpSFX;
+
     private InputController _input;
     private float _inputX;
     private float _yVel;
@@ -56,6 +60,9 @@ public class PlayerController : MonoBehaviour
 
         // Respect Runner's initial vertical offset as ground
         groundY = runner.motion.offset.y;
+
+        // optional safety: auto-cache if not assigned in Inspector
+        if (jumpSFX == null) jumpSFX = GetComponent<JumpSFX>();
     }
 
     private void OnDestroy()
@@ -174,7 +181,7 @@ public class PlayerController : MonoBehaviour
             _jumpInProgress = true; // block new jumps until Jump clip ends
         }
 
-        // keep your audio intact
-        GetComponent<JumpSFX>()?.OnJumpHappened();
+        // keep your audio intact (now via cached reference)
+        jumpSFX?.OnJumpHappened();
     }
 }

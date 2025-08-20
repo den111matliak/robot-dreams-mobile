@@ -1,18 +1,15 @@
 using UnityEngine;
 using JSAM;
-using System;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(Collider))]
 public class DonutPickup : MonoBehaviour
 {
     [SerializeField] private string playerTag = "Player";
-    [SerializeField] private int scoreValue = 1;
+    //[SerializeField] private int scoreValue = 1; // keep for future scoring
 
     [SerializeField] private Sounds donutSfx;
     [SerializeField] private bool spatialize = true;
-
-    public static event Action<int> OnDonutCollected;
 
     private void Reset()
     {
@@ -27,7 +24,7 @@ public class DonutPickup : MonoBehaviour
         if (spatialize) AudioManager.PlaySound(donutSfx, transform);
         else AudioManager.PlaySound(donutSfx);
 
-        OnDonutCollected?.Invoke(scoreValue);
+        // scoring can be added here later if needed
         Destroy(gameObject);
     }
 }
